@@ -1,26 +1,41 @@
+import br.com.alura.screenmatch.calculos.CalculadoraDeTempo;
+import br.com.alura.screenmatch.modelos.Filme;
+import br.com.alura.screenmatch.modelos.Serie;
 
-public class Main {
+public class Principal {
     public static void main(String[] args) {
+        Filme meuFilme = new Filme();
+        meuFilme.setNome( "O poderoso chefão");
+        meuFilme.setAnoDeLancamento( 1970);
+        meuFilme.setDuracaoEmMinutos(180);
 
-        System.out.println("Esse é o Screen Match");
-        System.out.println("Filme: Top Gun: Maverick");
+        System.out.println("Duração do filme: " + meuFilme.getDuracaoEmMinutos());
+        meuFilme.exibeFichaTecnica();
+        meuFilme.avalia(8);
+        meuFilme.avalia(10);
+        meuFilme.avalia(5);
+        System.out.println(meuFilme.getTotalAvaliacoes());
+        System.out.println(meuFilme.pegaMedia());
 
-        int anoDeLancamento = 2022;
-        System.out.println("Ano de lançamento: " + anoDeLancamento);
-        boolean incluidoNoPlano = true;
-        double notaDoDfilme = 8.1;
+        Serie lost = new Serie();
+        lost.setNome("Lost");
+        lost.setAnoDeLancamento(2000);
+        lost.setTemporadas(10);
+        lost.setEpisodiosPorTemporada(10);
+        lost.setMinutosPorEpisodio(50);
+        lost.exibeFichaTecnica();
+        System.out.println("Duração para maratonar Lost : " + lost.getDuracaoEmMinutos());
 
-        double media = (9.8 + 6.3 + 8.0)/3;
-        System.out.println(media);
-        String sinopse;
-        sinopse = """
-                Filme de aventura com galã dos anos 80
-                Muito bom!!!
-                ano de lançamento
-                """+ anoDeLancamento;
-        System.out.println(sinopse);
+        Filme outroFilme = new Filme();
+        outroFilme.setNome("Avatar ");
+        outroFilme.setAnoDeLancamento( 2023);
+        outroFilme.setDuracaoEmMinutos(200);
 
-        int classificação = (int) media/2;
-        System.out.println(classificação);
+        CalculadoraDeTempo calculadora = new CalculadoraDeTempo();
+        calculadora.inclui(meuFilme);
+        calculadora.inclui(outroFilme);
+        calculadora.inclui(lost);
+        System.out.println(calculadora.getTempoTotal());
+
     }
 }
