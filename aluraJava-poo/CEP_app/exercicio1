@@ -1,0 +1,37 @@
+package com.example.exercicio1;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) throws IOException, InterruptedException {
+        Scanner scanner = new Scanner(System.in);
+        String cep = "";
+
+        System.out.println("Digite o cep a ser consultado: ");
+        cep = scanner.nextLine();
+
+        String endereco = "https://viacep.com.br/ws/"+ cep.replace("-", "") + "/json/";
+
+        try {
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(endereco))
+                    .build();
+            HttpResponse<String> response = client
+                    .send(request, HttpResponse.BodyHandlers.ofString());
+
+            String json = response.body();
+            System.out.println(json);
+
+
+
+        }catch (NumberFormatException e ){
+            System.out.println("Desculpe o fomarto do numero está errado");
+        }
+    }
+}
